@@ -30,7 +30,8 @@ class User(models.Model):
             "is_admin":self.admin,
             "picture": pic,
             "following":following,
-            "favorit_recipes":favorits
+            "favorit_recipes":favorits,
+            "id":self.pk
 
         }
 

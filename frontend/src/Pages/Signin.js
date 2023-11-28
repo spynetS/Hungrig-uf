@@ -21,7 +21,7 @@ export default function Signup(props){
 
   useEffect(()=>{
     if(getCookie("sessionKey")!==""){
-      axois.post("identification/get_user_info/")
+      axois.post("identification/get_user_info/",{})
            .then(r=>{
              navigate("/user/home")
            })

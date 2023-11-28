@@ -34,7 +34,7 @@ export default function Input(props){
 
 
   return (
-    <div className="relative flex items-center w-full bg-[#fefefe] rounded-lg border border-1 px-3 py-2 outline-1" >
+    <div className={`relative flex items-center w-full bg-[#fefefe] rounded-lg border border-1 px-3 py-2 outline-1 ${props.className}`} >
       {props.icon?props.icon:null}
       <input
         className="w-full ml-2 outline-none text-[#555555  "

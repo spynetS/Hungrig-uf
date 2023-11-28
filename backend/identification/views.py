@@ -55,11 +55,39 @@ def log_in(request):
 
         return JsonResponse({"sessionKey":session.key})
 
+def upload_profile_picture(request):
+    user = extractSession(request)
+    file = request.FILES["file"]
+
+    user.profile_picture = file
+    user.save()
+    return JsonResponse("asd")
+
+def toggle_follow(request):
+    req = extractRequest(request)
+
+    user = req["session"]
+    for fellow in user.follow.all():
+        if fellow.pk == req["id"]:
+            user.follow.remove(fellow)
+            user.save()
+            return JsonResponse("removed")
+
+    user.follow.add(req["id"])
+    user.save()
+    return JsonResponse("added")
+
 def get_user_info(request):
     if request.method == "POST":
-        user = extractSession(request)
-        if user == None: return ErrorResponse("no session")
-    return JsonResponse(user.toDict())
+        req = extractRequest(request)
+        if "username" in req:
+            return JsonResponse(User.objects.get(username=req["username"]).toDict())
+        else:
+            user = req["session"]
+            if user == None:
+                return ErrorResponse("no session")
+            return JsonResponse(user.toDict())
+    return ErrorResponse("asd")
 
 def get_users(request):
     if request.method == "GET":

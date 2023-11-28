@@ -6,6 +6,8 @@ import Home from "./Pages/Home"
 import CreateRecipe from "./Pages/CreateRecipe"
 import Layout from "./Pages/Layout.js"
 import Logout from "./Pages/Logout"
+import Profile from "./Pages/Profile"
+import AddRecipe from "./Pages/AddRecipe"
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -15,6 +17,8 @@ function App() {
       <Routes>
         <Route path="/user" element={<Layout />}>
           <Route path="home" element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="add_recipe" element={<AddRecipe />} />
           <Route path="create_recipe" element={<CreateRecipe />} />
         </Route>
         <Route exact path="logout"     element={<Logout />}></Route>
