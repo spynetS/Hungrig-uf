@@ -1,0 +1,7 @@
+backend/.venv
+backend/__pycache__
+backend/backend/__pycache__
+backend/identification/__pycache__
+backend/identification/migrations/__pycache__
+backend/recipe/__pycache__
+backend/recipe/migrations/__pycache__
