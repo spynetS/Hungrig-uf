@@ -9,11 +9,20 @@ import { AiFillDelete } from "react-icons/ai";
 import { useOutletContext } from "react-router-dom";
 import Recipe from "../Components/Recipe"
 
+import { useLocation, useNavigate } from "react-router-dom";
+import { MdOpenInNew } from "react-icons/md";
+
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
+import FlatList from "flatlist-react/lib"
 
 const link = "http://localhost:8000/media/"
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 export default function(props){
 
@@ -21,11 +30,13 @@ export default function(props){
   const [refresh,setRefresh] = useState(false)
   const [user, setUser] = useState("")
   const [category,type] = useOutletContext();
+  let query = useQuery();
 
   useEffect(()=>{
     axiost.post("/recipe/get_recipes/",{category:category,type:type})
           .then(r=>{
-            setRecipes(r.data)
+            let arr = r.data
+            setRecipes(arr)
           })
     axiost.post("/identification/get_user_info/",{})
           .then(r=>{
@@ -33,11 +44,28 @@ export default function(props){
           })
   },[refresh,category,type])
 
+
+  const renderItem = (item,idx) =>{
+    return <Recipe user={user} reload={()=>setRefresh(!refresh)} recipe={item} key={idx}/>
+  }
+  const getRecipe = (id) =>{
+    for(let i = 0; i < recipes.length; i ++){
+      if(recipes[i].id == id) return recipes[i]
+    }
+    return null;
+  }
+
   return (
-    <div className="flex flex-col gap-4 w-full max-h-full" >
-    {recipes.map((recipe,i)=>
-      <Recipe user={user} reload={()=>setRefresh(!refresh)} recipe={recipe} key={i}/>
-    )}
+    <div>
+      <div className={`${query.get("recipe")!==null?"hidden":""}`}>
+        <FlatList
+            list={recipes}
+            renderItem={renderItem}
+            initialNumToRender={10} />
+      </div>
+      <div className={`${query.get("recipe")===null?"hidden":""}`}>
+        <Recipe user={user} reload={()=>setRefresh(!refresh)} recipe={getRecipe(query.get("recipe"))} />
+      </div>
     </div>
   )
 }
