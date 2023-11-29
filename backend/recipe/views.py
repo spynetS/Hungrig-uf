@@ -109,6 +109,14 @@ def get_recipes(request):
 
     return JsonResponse(recipes_dict)
 
+def set_review(request):
+    req = extractRequest(request)
+    recipe = Recipe.objects.get(pk=req["id"])
+    recipe.reviews += req["rating"]
+    recipe.reviewers += 1
+    recipe.save()
+    return JsonResponse({"rating":recipe.reviews})
+
 def remove_recipe(request):
     req = extractRequest(request)
     pk = req["id"]

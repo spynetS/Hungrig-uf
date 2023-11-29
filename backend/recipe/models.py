@@ -22,8 +22,8 @@ class Recipe(models.Model):
     title            = models.TextField(default="")
     description      = models.TextField(default="")
     # [ {"name":"name","amount":2}  ]
-    ingredients      = models.JSONField(default=json.loads("[]"))
-    instructions     = models.JSONField(default=json.loads("[]"))
+    ingredients      = models.JSONField(default=list)
+    instructions     = models.JSONField(default=list)
     preperation_time = models.IntegerField(default=0)
     cooking_time     = models.IntegerField(default=0)
     servings         = models.IntegerField(default=0)
@@ -33,6 +33,7 @@ class Recipe(models.Model):
     # images           = models.ForeignKey(Image,on_delete=models.CASCADE, blank=True, null=True)
     notes            = models.TextField(default="")
     reviews          = models.IntegerField(default=0)
+    reviewers        = models.IntegerField(default=0)
     comments         = models.ManyToManyField(Comment)
 
 

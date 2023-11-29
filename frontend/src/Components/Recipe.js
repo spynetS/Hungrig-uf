@@ -10,6 +10,7 @@ import { MdShare } from "react-icons/md";
 import { MdOpenInNew } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
+import ReactStars from 'react-stars'
 
 const link = "http://localhost:8000/media/"
 
@@ -124,6 +125,21 @@ export default function Recipe(props){
       return false
     }
   }
+
+  const ratingChanged = (e) =>{
+    setLoading(true)
+    axiost.post("/recipe/review/",{rating:e,id:props.recipe.id})
+          .then(r=>{
+            setLoading(false)
+            props.reload()
+          })
+          .catch(err=>{
+            setLoading(false)
+            props.reload()
+          })
+
+  }
+
   return (
     <div id={props.recipe.title} className="bg-white rounded-lg shadow-lg mt-2 p-3" >
         <Loading on={loading} />
@@ -156,7 +172,13 @@ export default function Recipe(props){
                 </div>
               </div>
 
-              <h1 className="text-[#FFA6DC] font-semibold italic " >Rakning: {(props.recipe.reviews)}/5</h1>
+            <h1 className="text-[#FFA6DC] font-semibold italic " >Rakning: {(props.recipe.reviews/(props.recipe.reviewers>0?props.recipe.reviewers:1)).toFixed(0)}/5</h1>
+              <ReactStars
+                value={(props.recipe.reviews/props.recipe.reviewers!==0?props.recipe.reviewers:1)}
+                count={5}
+                onChange={ratingChanged}
+                size={24}
+                color2={'#ffa6dc'} />
 
             <div className="hidden md:block" >
                 <div className="flex flex-row gap-3 items-end" >
