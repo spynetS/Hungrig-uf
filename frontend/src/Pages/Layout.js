@@ -69,7 +69,7 @@ const Layout = () => {
           </div>
           {/* <Button onClick={()=>navigate("/user/create_recipe")} className="w-32 h-10" >Nytt recept</Button> */}
         </div>
-        <nav  className={`h-screen w-screen md:hidden z-40 bg-slate-100 right-0 p-4 fixed duration-[500ms]  ${open?" top-0":" -top-[100%]"} `} >
+        <nav  className={`h-screen w-screen md:hidden z-40 bg-slate-100 right-0 p-4 fixed duration-[500ms]  ${open?" top-0":" -top-[150%]"} `} >
           <div className="flex flex-row gap-2 items-center" >
             <IoClose onClick={()=>setOpen(false)} className="" size={75} />
             <h1 className="text-6xl font-bold italic font-Inter text-[#FFA6DC]" >Hungrig UF</h1>
