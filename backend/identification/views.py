@@ -68,7 +68,7 @@ def toggle_follow(request):
 
     user = req["session"]
     for fellow in user.follow.all():
-        if fellow.pk == req["id"]:
+        if req["id"] != user.pk and fellow.pk == req["id"]:
             user.follow.remove(fellow)
             user.save()
             return JsonResponse("removed")

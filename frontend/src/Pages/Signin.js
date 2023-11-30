@@ -53,7 +53,9 @@ export default function Signup(props){
         .catch(error=>{
           setLoading(false);
           console.log(JSON.stringify(error))
-          setError(error.response.data.code)
+          try{
+            setError(error.response.data.code)
+          }catch(err){}
           setUsername("");
         });
 
