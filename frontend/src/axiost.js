@@ -8,7 +8,7 @@ export function getBaseURL(){
   if (path === "www.techpology.com") {
     baseUrl = "https://cross.techpology.com";
   } else {
-    baseUrl = "http://192.181.23.24:8000";
+    baseUrl = "http://193.181.23.24:8000";
   }
   return baseUrl;
 }
