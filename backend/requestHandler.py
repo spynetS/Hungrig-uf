@@ -27,12 +27,16 @@ def extractRequest(req):
         # if sessionKey exist add the session data to the body
         if "sessionKey" in req.headers:
             sessionKey = req.headers.get("sessionKey")
+            print("session key", sessionKey)
             try:
                 sessionValue = Session.objects.filter(key=sessionKey)[0]
                 sessionValue.checkSession()
 
+                print("try")
                 body["session"] = sessionValue.user
-            except:pass
+            except Exception as e:
+                print("session error",str(e))
+                pass
         return body
     return req
 

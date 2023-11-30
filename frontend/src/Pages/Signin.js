@@ -6,6 +6,7 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import axois from "../axiost"
 import {getCookie,setCookie} from "../CookieHandler.js"
 import Loading from "../Components/Loading.js";
+import { changeUrl } from "../global_func.js";
 
 export default function Signup(props){
 
@@ -23,7 +24,7 @@ export default function Signup(props){
     if(getCookie("sessionKey")!==""){
       axois.post("identification/get_user_info/",{})
            .then(r=>{
-             navigate("/user/home")
+             changeUrl("/user/home")
            })
            .catch(error=>{
 
@@ -44,7 +45,9 @@ export default function Signup(props){
         .then(r=>{
           setLoading(false)
           setCookie("sessionKey",r.data.sessionKey)
-          navigate("/user/home")
+          console.log(r.data.sessionKey)
+          console.log(getCookie("sessionKey"))
+          changeUrl("/user/home")
 
         })
         .catch(error=>{

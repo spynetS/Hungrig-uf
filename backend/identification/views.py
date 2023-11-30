@@ -83,9 +83,10 @@ def get_user_info(request):
         if "username" in req:
             return JsonResponse(User.objects.get(username=req["username"]).toDict())
         else:
+            print(req)
+            # if "session" != req:
+            #     return ErrorResponse("no session")
             user = req["session"]
-            if user == None:
-                return ErrorResponse("no session")
             return JsonResponse(user.toDict())
     return ErrorResponse("asd")
 

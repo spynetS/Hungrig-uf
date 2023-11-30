@@ -123,8 +123,8 @@ export default function Profile(props){
           <IoAddOutline size={75} className="text-[#ffa6dc]"/>
           <h1 className="italic text-2xl  text-[#ffa6dc] " >Nytt recept</h1>
         </div>
-        <div className="w-[100px]">
-          <Button onClick={toggleFollow} className={`${showNotMe} w-[100px] h-10`} >{followText()}</Button>
+        <div className={`${showNotMe} w-[100px]`}>
+          <Button onClick={toggleFollow} className={` w-[100px] h-10`} >{followText()}</Button>
         </div>
       </div>
     <h1 className="mt-12 font-semibold text-3xl italic" >Alla dina recept</h1>

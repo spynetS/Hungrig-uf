@@ -31,8 +31,10 @@ export default function(props){
   const [user, setUser] = useState("")
   const [category,type] = useOutletContext();
   let query = useQuery();
+  const navigate = useNavigate()
 
   useEffect(()=>{
+    console.log(axiost.request._header)
     axiost.post("/recipe/get_recipes/",{category:category,type:type})
           .then(r=>{
             let arr = r.data
@@ -41,6 +43,9 @@ export default function(props){
     axiost.post("/identification/get_user_info/",{})
           .then(r=>{
             setUser(r.data)
+          })
+          .catch(err=>{
+            // navigate("/")
           })
   },[refresh,category,type])
 
