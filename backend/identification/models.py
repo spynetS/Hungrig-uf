@@ -19,7 +19,7 @@ class User(models.Model):
 
         following = []
         for follow in self.follow.all():
-            if follow != self: following.append(follow.toDict())
+            if follow != self: following.append(follow.pk)
 
         favorits = []
         for favorit in self.favorit_recipies.all():
