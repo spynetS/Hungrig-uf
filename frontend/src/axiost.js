@@ -4,11 +4,11 @@ import {getCookie} from "./CookieHandler.js"
 let path = window.location.hostname;
 
 export function getBaseURL(){
-  let baseUrl = "http://localhost:8000"
+  let baseUrl = "http://192.181.23.24:8000"
   if (path === "www.techpology.com") {
     baseUrl = "https://cross.techpology.com";
   } else {
-    baseUrl = "http://localhost:8000";
+    baseUrl = "http://192.181.23.24:8000";
   }
   return baseUrl;
 }
