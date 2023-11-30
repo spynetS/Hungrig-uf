@@ -47,7 +47,11 @@ export default function Signup(props){
           setCookie("sessionKey",r.data.sessionKey)
           console.log(r.data.sessionKey)
           console.log(getCookie("sessionKey"))
-          changeUrl("/user/home")
+          if(r.data.is_admin){
+            changeUrl("/admin/activate")
+          }else{
+            changeUrl("/user/home")
+          }
 
         })
         .catch(error=>{
@@ -63,7 +67,6 @@ export default function Signup(props){
 
   const signin = () =>{
     setLoading(true)
-    setLoading(true)
     gin(long,lat);
   }
 
@@ -73,8 +76,8 @@ export default function Signup(props){
       <div className="flex flex-col w-[90%] sm:w-1/2 xl:w-1/4 items-center gap-4 bg-[#fefefe] p-8 rounded-xl shadow-lg " >
         <img src="./logo.png" className="w-[80px]" />
         <div className="flex flex-col items-start w-full">
-          <h1 className="text-[#727272] text-2xl" >Welcome to Cross</h1>
-          <h1 className="text-[#727272]" >The app that makes your problems tini:er</h1>
+          <h1 className="text-[#727272] text-2xl" >Welcome to Hungrig uf</h1>
+          <h1 className="text-[#727272]" >Appen som gör till köksliv lättare</h1>
         </div>
 
         <Input placeholder="Username"                         value={username} onChange={setUsername} trigger={signin}/>

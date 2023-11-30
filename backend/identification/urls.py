@@ -11,6 +11,8 @@ urlpatterns = [
     path('set_favorit_recipe/', views.set_favorit_recipe, name='set_favorit_recipe'),
     path('upload_profile_picture/', views.upload_profile_picture, name='upload_profile_picture'),
     path('toggle_follow/', views.toggle_follow, name='toggle_follow'),
+    path('set_has_paid/', views.set_has_paid, name='set_has_paid'),
+
     # upload_profile_picture
     # Add more URL patterns as needed
 ]

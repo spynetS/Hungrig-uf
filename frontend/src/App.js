@@ -8,6 +8,8 @@ import Layout from "./Pages/Layout.js"
 import Logout from "./Pages/Logout"
 import Profile from "./Pages/Profile"
 import AddRecipe from "./Pages/AddRecipe"
+import Activate from "./Pages/Activate"
+import HasNotPaid from "./Pages/HasNotPaid"
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -21,9 +23,13 @@ function App() {
           <Route path="add_recipe" element={<AddRecipe />} />
           <Route path="create_recipe" element={<CreateRecipe />} />
         </Route>
+        <Route path="/admin">
+          <Route path="activate" element={<Activate />} />
+        </Route>
         <Route exact path="logout"     element={<Logout />}></Route>
         <Route path="/" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/hasnotpaid" element={<HasNotPaid />} />
       </Routes>
     </BrowserRouter>
   );

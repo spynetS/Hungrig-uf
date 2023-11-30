@@ -6,6 +6,10 @@ class User(models.Model):
     username = models.TextField()
     password = models.TextField()
     admin = models.BooleanField(default=False)
+    phonenumber = models.TextField(default="0")
+
+    has_paid = models.BooleanField(default=False)
+
     profile_picture = models.ImageField(blank=True)
 
     follow = models.ManyToManyField('self', symmetrical=False)
@@ -28,6 +32,8 @@ class User(models.Model):
         return {
             "username":self.username,
             "is_admin":self.admin,
+            "phonenumber":self.phonenumber,
+            "has_paid":self.has_paid,
             "picture": pic,
             "following":following,
             "favorit_recipes":favorits,
@@ -53,7 +59,7 @@ class Session(models.Model):
         print(between)
 
 
-        if between > (10*60*60):
+        if between > (10*60*60*60):
             self.delete()
 
     def save(self, *args, **kwargs):

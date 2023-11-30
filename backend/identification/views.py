@@ -53,7 +53,7 @@ def log_in(request):
                           )
         session.save()
 
-        return JsonResponse({"sessionKey":session.key})
+        return JsonResponse({"sessionKey":session.key, "is_admin":users[0].admin})
 
 def upload_profile_picture(request):
     user = extractSession(request)
@@ -62,6 +62,16 @@ def upload_profile_picture(request):
     user.profile_picture = file
     user.save()
     return JsonResponse("asd")
+
+def set_has_paid(request):
+    req = extractRequest(request)
+    if req["session"].admin:
+        user = User.objects.get(pk=req["id"])
+        user.has_paid = True
+        user.save()
+        return JsonResponse(f"Set user: {user.username}/{user.phonenumber} to paid")
+    return ErrorResponse("Not admin")
+
 
 def toggle_follow(request):
     req = extractRequest(request)
@@ -95,7 +105,7 @@ def get_users(request):
         req = extractRequest(request)
         users = []
         for user in User.objects.all():
-            users.append({"username":user.username, "pk":user.pk})
+            users.append(user.toDict())
         print(users)
         return JsonResponse(users)
     return ErrorResponse("wrong method")
@@ -107,6 +117,10 @@ def create_user(request):
         try:
             username = req["username"]
             password = argon(req["password"])
+            try:
+                phonenumber = int(req["phonenumber"])
+            except:
+                raise Exception("Phonenumber not correct")
 
             users = User.objects.filter(username=username)
             if len(users) > 0:
@@ -115,12 +129,13 @@ def create_user(request):
             new_user = User(
                 username=username, 
                 password=password,
+                phonenumber=str(phonenumber),
             )
             new_user.save()
             return JsonResponse({"code":"User created"},status=201)
 
         except Exception as e:
-            return JsonResponse({"error":"Something went wrong","value":str(e)},status=400)
+            return JsonResponse({"error":"Something went wrong","code":str(e)},status=400)
         
     return JsonResponse({"code":"Wrong method"},status=404)
 

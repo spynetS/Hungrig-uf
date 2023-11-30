@@ -99,7 +99,7 @@ const onImageChange = (event) => {
     <div className="w-full flex flex-col items-center">
       <Loading on={loading}/>
       <h1 className="text-4xl font-semibold italic mb-2">Lägg till ett nytt recept</h1>
-      <div className="w-1/2 flex flex-col gap-3" >
+      <div className="px-5 md:w-1/2 flex flex-col gap-3" >
         <Input value={title} onChange={setTitle}  placeholder={"Rubrik"}/>
         <Input value={description} onChange={setDescription}  placeholder={"Beskrivning"}/>
         <h1 className="font-semibold italic text-xl" >Bild:</h1>

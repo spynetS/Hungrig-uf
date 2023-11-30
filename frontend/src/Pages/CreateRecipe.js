@@ -7,7 +7,7 @@ export default function CreateRecipe(props){
 
   return (
     <div className="flex items-center justify-center" >
-      <div className="shadow-lg p-4 grid grid-cols-3 gap-3 " >
+      <div className="shadow-lg  grid grid-cols-3 gap-3 " >
         <Input placeholder="Rubrik" />
         <Input placeholder="Beskrivning" />
         <Input placeholder="Tillagnings tid" type="number" />

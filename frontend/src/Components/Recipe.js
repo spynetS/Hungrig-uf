@@ -11,6 +11,7 @@ import { MdOpenInNew } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import ReactStars from 'react-stars'
+import { changeUrl } from "../global_func"
 
 function Comment(props){
   const navigate = useNavigate()
@@ -48,6 +49,7 @@ export default function Recipe(props){
   const navigate = useNavigate()
   const [comment,setComment] = useState("")
   const [loading,setLoading] = useState(false)
+  const [setRating, setSetRating] = useState(0)
 
   if(props.recipe == null){
     return (<div></div>)
@@ -102,12 +104,10 @@ export default function Recipe(props){
     axiost.post("/identification/set_favorit_recipe/",body)
           .then(r=>{
             setLoading(false)
-            props.reload()
 
           })
           .catch(err=>{
             setLoading(false)
-            props.reload()
 
           })
   }
@@ -126,6 +126,7 @@ export default function Recipe(props){
 
   const ratingChanged = (e) =>{
     setLoading(true)
+    setSetRating(e)
     axiost.post("/recipe/review/",{rating:e,id:props.recipe.id})
           .then(r=>{
             setLoading(false)
@@ -154,7 +155,7 @@ export default function Recipe(props){
              (<FaRegStar onClick={()=>setToFavorit(true)} size={30} className="mb-2 hover:scale-125 duration-75 text-yellow-400 hover:cursor-pointer " />):
              <FaStar onClick={()=>setToFavorit(false)}    size={30} className="mb-2 hover:scale-125 duration-75 text-yellow-400 hover:cursor-pointer " />}
             <MdShare size={30} className="cursor-pointer" />
-            <MdOpenInNew onClick={()=>window.open(window.location.href+"?recipe="+props.recipe.id)} size={30} className="cursor-pointer" />
+            <MdOpenInNew onClick={()=>changeUrl("/user/home?recipe="+props.recipe.id)} size={30} className="cursor-pointer" />
           </div>
         </div>
 
@@ -172,7 +173,7 @@ export default function Recipe(props){
 
             <h1 className="text-[#FFA6DC] font-semibold italic " >Rakning: {(props.recipe.reviews/(props.recipe.reviewers>0?props.recipe.reviewers:1)).toFixed(0)}/5</h1>
               <ReactStars
-                value={(props.recipe.reviews/props.recipe.reviewers!==0?props.recipe.reviewers:1)}
+                value={(props.recipe.reviews/(props.recipe.reviewers>0?props.recipe.reviewers:1)).toFixed(0)}
                 count={5}
                 onChange={ratingChanged}
                 size={24}

@@ -10,7 +10,7 @@ export default function(props){
 
   useEffect(()=>{
     setCookie("sessionKey","");
-    navigate("/signin")
+    navigate("/")
   },[])
 
   return(

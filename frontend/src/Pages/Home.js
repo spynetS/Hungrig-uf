@@ -16,7 +16,6 @@ import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import FlatList from "flatlist-react/lib"
 
-// const link = "http://localhost:8000/media/"
 
 function useQuery() {
   const { search } = useLocation();
@@ -45,7 +44,7 @@ export default function(props){
             setUser(r.data)
           })
           .catch(err=>{
-            // navigate("/")
+            navigate("/")
           })
   },[refresh,category,type])
 

@@ -40,7 +40,8 @@ export default function Profile(props){
           })
     }
     else{
-    axiost.post("/identification/get_user_info/",{})
+      //no user name was found in get query
+      axiost.post("/identification/get_user_info/",{})
           .then(r=>{
             setUser(r.data)
           })
@@ -102,7 +103,7 @@ export default function Profile(props){
 
   const followText =()=>{
     for(let i = 0; i < me.following.length; i ++){
-      if (me.following[i].id === (user.id))
+      if (me.following[i] == (user.id))
         return "Avfölj"
     }
     return "Följ"
@@ -111,7 +112,9 @@ export default function Profile(props){
   return (
     <div className="flex flex-col gap-4 px-4">
       <Loading on={loading}/>
+
       <div className="flex flex-row justify-between items-end" >
+
         <div className="flex flex-row gap-2 items-end  ">
           <div className={`relative flex flex-row items-center hover:scale-105 duration-75 cursor-pointer justify-center`}>
             <img className=" flex flex-col justify-end items-center bg-gray-200 h-[120px] w-[120px] font-semibold rounded-full " alt={""}  src={`${link}${user.picture}`}/>
@@ -120,25 +123,31 @@ export default function Profile(props){
           </div>
           <h1 className="italic text-2xl  text-[#ffa6dc] " >{user.username}</h1>
         </div>
+
         <div onClick={()=>navigate("/user/add_recipe")} className={`${hideNotMe} flex flex-col items-center hover:bg-slate-200 cursor-pointer duration-100 rounded-lg p-2 `} >
           <IoAddOutline size={75} className="text-[#ffa6dc]"/>
           <h1 className="italic text-2xl  text-[#ffa6dc] " >Nytt recept</h1>
         </div>
+
         <div className={`${showNotMe} w-[100px]`}>
           <Button onClick={toggleFollow} className={` w-[100px] h-10`} >{followText()}</Button>
         </div>
+
       </div>
+
     <h1 className="mt-12 font-semibold text-3xl italic" >Alla dina recept</h1>
     <hr className="border-[#FFA6DC] "/>
-    {recipes.map((recipe,i)=>
-      <div>
-        <Recipe user={user} reload={()=>setRefresh(!refresh)} recipe={recipe} key={i}/>
-      <div className={`flex flex-row gap-2 ${hideNotMe} `} >
+
+    {recipes.map((recipe,ix)=>
+      <div key={ix}>
+        <Recipe user={user} reload={()=>setRefresh(!refresh)} recipe={recipe} />
+        <div className={`flex flex-row gap-2 ${hideNotMe} `} >
           <Button>Redigera</Button>
           <Button onClick={()=>removeRecipe(recipe)} >Tabort</Button>
         </div>
       </div>
     )}
+
     </div>
   );
 }

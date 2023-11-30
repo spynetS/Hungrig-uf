@@ -13,8 +13,8 @@ export function getBaseURL(){
   return baseUrl;
 }
 
-// export const link = "http://localhost:8000/media/"
-export const link = "http://hungriguf.se:8000/media/"
+export const link = "http://localhost:8000/media/"
+// export const link = "http://hungriguf.se:8000/media/"
 
 const instance = axios.create({
   //baseURL: 'http://localhost:8000', // Replace with your API base URL
