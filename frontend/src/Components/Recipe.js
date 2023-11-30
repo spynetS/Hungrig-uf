@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import {getCookie,setCookie} from "../CookieHandler.js"
-import axiost from "../axiost"
+import axiost, {link} from "../axiost"
 import Input from "../Components/Input"
 import Loading from "../Components/Loading"
 import Button from "../Components/Button"
@@ -11,8 +11,6 @@ import { MdOpenInNew } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import ReactStars from 'react-stars'
-
-const link = "http://localhost:8000/media/"
 
 function Comment(props){
   const navigate = useNavigate()
@@ -146,7 +144,7 @@ export default function Recipe(props){
         <div className="flex flex-row justify-between  gap-4 pr-12" >
           <div className="flex flex-row gap-4 items-end" >
             <div onClick={()=>navigate("/user/profile?username="+props.recipe.auther.username)} className="flex flex-col items-center hover:cursor-pointer hover:-translate-y-0.5 duration-100 ">
-                <img className=" flex flex-col justify-end items-center bg-gray-200 h-[60px] w-[60px] font-semibold rounded-full " alt={""}  src={`http://localhost:8000/media/${props.recipe.auther.picture}`}/>
+              <img className=" flex flex-col justify-end items-center bg-gray-200 h-[60px] w-[60px] font-semibold rounded-full " alt={""}  src={`${link}${props.recipe.auther.picture}`}/>
                 <h1 className="italic text-sm font-semibold  " >{props.recipe.auther.username}</h1>
             </div>
             <h1 className="italic text-2xl" >{props.recipe.title}, {props.recipe.servings} portioner</h1>

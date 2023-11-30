@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import axiost from "../axiost"
+import axiost, {link} from "../axiost"
 import { IoAddOutline } from "react-icons/io5";
 import Recipe from "../Components/Recipe"
 import { useLocation, useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ function useQuery() {
 
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
+
 
 export default function Profile(props){
 
@@ -113,7 +114,7 @@ export default function Profile(props){
       <div className="flex flex-row justify-between items-end" >
         <div className="flex flex-row gap-2 items-end  ">
           <div className={`relative flex flex-row items-center hover:scale-105 duration-75 cursor-pointer justify-center`}>
-            <img className=" flex flex-col justify-end items-center bg-gray-200 h-[120px] w-[120px] font-semibold rounded-full " alt={""}  src={`http://localhost:8000/media/${user.picture}`}/>
+            <img className=" flex flex-col justify-end items-center bg-gray-200 h-[120px] w-[120px] font-semibold rounded-full " alt={""}  src={`${link}${user.picture}`}/>
             <input type="file" onChange={ upload } className={`display-none absolute overflow-hidden w-full ${hideNotMe} `}/>
             {/* <h1 className={`absolute italic ${user.picture===""?"text-black":"text-gray-200"}  font-semibold`} >Ändra bild</h1> */}
           </div>
