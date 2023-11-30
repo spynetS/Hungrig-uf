@@ -5,8 +5,8 @@ let path = window.location.hostname;
 
 export function getBaseURL(){
   let baseUrl = "http://localhost:8000";
-  if (path === "http://193.181.23.24:8000") {
-    baseUrl = "http://193.181.23.24:8000";
+  if (path === "www.hungrigfuf.se:8000") {
+    baseUrl = "www.hungrigfuf.se:8000";
   } else {
     baseUrl = "http://localhost:8000";
   }
