@@ -104,10 +104,12 @@ export default function Recipe(props){
     axiost.post("/identification/set_favorit_recipe/",body)
           .then(r=>{
             setLoading(false)
+            props.reload()
 
           })
           .catch(err=>{
             setLoading(false)
+            props.reload()
 
           })
   }
@@ -151,9 +153,10 @@ export default function Recipe(props){
             <h1 className="italic text-2xl" >{props.recipe.title}, {props.recipe.servings} portioner</h1>
           </div>
           <div className="flex flex-row gap-2">
-            {!isFav()?
-             (<FaRegStar onClick={()=>setToFavorit(true)} size={30} className="mb-2 hover:scale-125 duration-75 text-yellow-400 hover:cursor-pointer " />):
-             <FaStar onClick={()=>setToFavorit(false)}    size={30} className="mb-2 hover:scale-125 duration-75 text-yellow-400 hover:cursor-pointer " />}
+
+            <FaStar onClick={()=>setToFavorit(false)}    size={30} className={` ${isFav()?"opacity-100":"opacity-0 scale-0 fixed "} duration-100 mb-2 hover:scale-125 duration-75 text-yellow-400 hover:cursor-pointer `} />
+            <FaRegStar onClick={()=>setToFavorit(true)} size={30} className={` ${!isFav()?"opacity-100":"opacity-0 scale-0 fixed "} duration-100 mb-2 hover:scale-125 duration-75 text-yellow-400 hover:cursor-pointer `} />
+
             <MdShare size={30} className="cursor-pointer" />
             <MdOpenInNew onClick={()=>changeUrl("/user/home?recipe="+props.recipe.id)} size={30} className="cursor-pointer" />
           </div>
