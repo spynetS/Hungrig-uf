@@ -167,7 +167,7 @@ export default function Recipe(props){
       <div className="flex flex-col md:grid md:grid-cols-4 md:grid-rows-1" >
           <div className="flex flex-col col-span-3 md:col-span-2 pr-2 w-full" >
               <div className="flex flex-col md:flex-row gap-2" >
-                <img alt={"Bild Saknas"} className="flex items-center justify-center text-3xl text-gray-600 italic bg-gray-200 rounded-md w-full md:w-2/3 aspect-video" src={`${link}${props.recipe.image}`} />
+            <img alt={"Bild Saknas"} className="flex items-center justify-center text-3xl text-gray-600 italic bg-gray-200 rounded-md w-full max-h-[400px] w-auto" src={`${link}${props.recipe.image}`} />
                 <div>
                   <h1 className="italic text-lg font-bold" >Beskrivning</h1>
                   <h1 className="italic text-lg" >{props.recipe.description}</h1>
