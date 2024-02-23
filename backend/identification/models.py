@@ -15,6 +15,9 @@ class User(models.Model):
     follow = models.ManyToManyField('self', symmetrical=False)
     favorit_recipies = models.ManyToManyField("recipe.Recipe")
 
+    def __str__(self):
+        return self.username
+
     def toDict(self):
         try:
             pic = self.profile_picture.name
