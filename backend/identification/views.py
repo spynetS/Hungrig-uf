@@ -110,6 +110,10 @@ def get_users(request):
         return JsonResponse(users)
     return ErrorResponse("wrong method")
 
+def validate_username(username):
+    import re
+    pattern = r"^[a-zA-Z0-9_-]{3,20}$"
+    return bool(re.match(pattern, username))
 
 def create_user(request):
     if request.method == "POST":
@@ -117,6 +121,8 @@ def create_user(request):
         try:
             username = req["username"]
             password = argon(req["password"])
+            if not validate_username(username):
+                return JsonResponse({"error":"Username is not valid","code":"Username is not valid"},status=400)
             try:
                 phonenumber = int(req["phonenumber"])
             except:
