@@ -5,3 +5,5 @@ backend/identification/__pycache__
 backend/identification/migrations/__pycache__
 backend/recipe/__pycache__
 backend/recipe/migrations/__pycache__
+backend/media/
+backend/db.sqlite3
